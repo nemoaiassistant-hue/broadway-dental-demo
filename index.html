@@ -2,18 +2,19 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Broadway Dental Boutique — Chatbot Demo</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         
         body {
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             background: #0a0a0a;
             color: #fff;
             min-height: 100vh;
+            min-height: 100dvh;
             display: flex;
             flex-direction: column;
         }
@@ -28,14 +29,12 @@
             font-weight: 500;
             letter-spacing: 1px;
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
+            top: 0; left: 0; right: 0;
             z-index: 1000;
         }
         .demo-banner span { font-weight: 700; }
 
-        /* Mockup of their site */
+        /* Site mockup */
         .site-mockup {
             margin-top: 38px;
             flex: 1;
@@ -43,7 +42,6 @@
             flex-direction: column;
         }
 
-        /* Nav bar */
         .mock-nav {
             display: flex;
             align-items: center;
@@ -54,30 +52,20 @@
         }
         .mock-nav-logo {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 22px;
-            font-weight: 600;
-            color: #c9a84c;
-            letter-spacing: 1px;
+            font-size: 22px; font-weight: 600;
+            color: #c9a84c; letter-spacing: 1px;
         }
         .mock-nav-links {
-            display: flex;
-            gap: 28px;
-            font-size: 13px;
-            font-weight: 400;
-            color: #999;
-            letter-spacing: 0.5px;
+            display: flex; gap: 28px;
+            font-size: 13px; color: #999; letter-spacing: 0.5px;
         }
 
-        /* Hero section */
         .mock-hero {
             position: relative;
             height: 500px;
             background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 50%, #1a1510 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            overflow: hidden;
+            display: flex; align-items: center; justify-content: center;
+            text-align: center; overflow: hidden;
         }
         .mock-hero::before {
             content: '';
@@ -86,112 +74,76 @@
             background: radial-gradient(ellipse at center, rgba(201, 168, 76, 0.08) 0%, transparent 70%);
         }
         .mock-hero-content {
-            position: relative;
-            z-index: 1;
-            max-width: 600px;
-            padding: 0 20px;
+            position: relative; z-index: 1;
+            max-width: 600px; padding: 0 20px;
         }
         .mock-hero h1 {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 48px;
-            font-weight: 600;
-            color: #fff;
-            margin-bottom: 16px;
-            line-height: 1.2;
+            font-size: 48px; font-weight: 600;
+            color: #fff; margin-bottom: 16px; line-height: 1.2;
         }
         .mock-hero p {
-            font-size: 15px;
-            color: #b0a080;
-            line-height: 1.6;
-            margin-bottom: 24px;
-            max-width: 480px;
-            margin-left: auto;
-            margin-right: auto;
+            font-size: 15px; color: #b0a080;
+            line-height: 1.6; margin-bottom: 24px;
+            max-width: 480px; margin-left: auto; margin-right: auto;
         }
         .mock-hero-btn {
             display: inline-block;
             padding: 12px 32px;
             background: #c9a84c;
             color: #1a1a1a;
-            font-size: 12px;
-            font-weight: 600;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            border: none;
-            cursor: pointer;
+            font-size: 12px; font-weight: 600;
+            letter-spacing: 2px; text-transform: uppercase;
+            border: none; cursor: pointer;
         }
 
-        /* Services section */
         .mock-services {
             padding: 60px 40px;
-            background: #111;
-            text-align: center;
+            background: #111; text-align: center;
         }
         .mock-services h2 {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 28px;
-            color: #c9a84c;
-            margin-bottom: 40px;
+            font-size: 28px; color: #c9a84c; margin-bottom: 40px;
         }
         .mock-services-grid {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            flex-wrap: wrap;
-            max-width: 900px;
-            margin: 0 auto;
+            display: flex; gap: 20px;
+            justify-content: center; flex-wrap: wrap;
+            max-width: 900px; margin: 0 auto;
         }
         .mock-service-card {
-            background: #1a1a1a;
-            border: 1px solid #2a2a2a;
-            padding: 28px 20px;
-            width: 160px;
-            text-align: center;
+            background: #1a1a1a; border: 1px solid #2a2a2a;
+            padding: 28px 20px; width: 160px; text-align: center;
         }
         .mock-service-card .icon {
-            width: 40px;
-            height: 40px;
-            margin: 0 auto 12px;
+            width: 40px; height: 40px; margin: 0 auto 12px;
             border-radius: 50%;
             background: linear-gradient(135deg, #c9a84c, #e8d48b);
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            display: flex; align-items: center; justify-content: center;
             font-size: 18px;
         }
         .mock-service-card h4 {
-            font-size: 12px;
-            font-weight: 500;
-            color: #ddd;
-            letter-spacing: 0.5px;
+            font-size: 12px; font-weight: 500;
+            color: #ddd; letter-spacing: 0.5px;
         }
 
-        /* Footer */
         .mock-footer {
             padding: 30px 40px;
-            background: #080808;
-            text-align: center;
-            color: #555;
-            font-size: 12px;
+            background: #080808; text-align: center;
+            color: #555; font-size: 12px;
             border-top: 1px solid #1a1a1a;
         }
 
-        /* ===== CHAT WIDGET ===== */
+        /* ===== CHAT BUBBLE BUTTON ===== */
         .chat-bubble {
             position: fixed;
-            bottom: 24px;
-            right: 24px;
-            width: 60px;
-            height: 60px;
+            bottom: 24px; right: 24px;
+            width: 60px; height: 60px;
             background: linear-gradient(135deg, #c9a84c, #e8d48b);
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            border-radius: 50%; cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
             box-shadow: 0 4px 20px rgba(201, 168, 76, 0.4);
             z-index: 999;
-            transition: transform 0.2s, box-shadow 0.2s;
+            transition: transform 0.2s, box-shadow 0.2s, opacity 0.3s;
             animation: pulse-gold 2s infinite;
         }
         .chat-bubble:hover {
@@ -199,151 +151,230 @@
             box-shadow: 0 6px 28px rgba(201, 168, 76, 0.6);
         }
         .chat-bubble svg { width: 28px; height: 28px; fill: #1a1a1a; }
+        .chat-bubble.hidden { opacity: 0; pointer-events: none; transform: scale(0.5); }
 
         @keyframes pulse-gold {
             0%, 100% { box-shadow: 0 4px 20px rgba(201, 168, 76, 0.4); }
             50% { box-shadow: 0 4px 30px rgba(201, 168, 76, 0.7); }
         }
 
-        .chat-window {
+        /* ===== CHAT OVERLAY — TELEGRAM STYLE ===== */
+        .chat-overlay {
             position: fixed;
-            bottom: 96px;
-            right: 24px;
-            width: 380px;
-            max-height: 520px;
-            background: #141414;
-            border: 1px solid #2a2518;
-            border-radius: 16px;
-            display: none;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: #0e1621;
+            z-index: 1001;
+            display: flex;
             flex-direction: column;
-            z-index: 998;
-            box-shadow: 0 12px 48px rgba(0,0,0,0.6);
-            overflow: hidden;
+            transform: translateY(100%);
+            transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            will-change: transform;
         }
-        .chat-window.open { display: flex; }
+        .chat-overlay.open {
+            transform: translateY(0);
+        }
 
-        .chat-header {
-            background: linear-gradient(135deg, #1a1a10, #1a1510);
-            padding: 16px 20px;
+        /* Desktop: constrain to window */
+        @media (min-width: 481px) {
+            .chat-overlay {
+                top: auto;
+                bottom: 24px;
+                right: 24px;
+                width: 400px;
+                height: 600px;
+                max-height: calc(100vh - 48px);
+                border-radius: 16px;
+                transform: translateY(20px);
+                opacity: 0;
+                transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+                box-shadow: 0 12px 48px rgba(0,0,0,0.6);
+                border: 1px solid #1e2a3a;
+            }
+            .chat-overlay.open {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Header — Telegram style */
+        .tg-header {
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            border-bottom: 1px solid #2a2518;
+            padding: 0 12px;
+            height: 56px;
+            background: #1a2736;
+            border-bottom: 1px solid #0d1520;
+            flex-shrink: 0;
         }
-        .chat-header-info { display: flex; align-items: center; gap: 12px; }
-        .chat-header-avatar {
-            width: 36px; height: 36px;
+        .tg-back {
+            width: 40px; height: 40px;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; border: none; background: none;
+            color: #c9a84c; font-size: 22px;
+            border-radius: 50%;
+            transition: background 0.15s;
+        }
+        .tg-back:hover { background: rgba(255,255,255,0.05); }
+        .tg-avatar {
+            width: 38px; height: 38px;
             background: linear-gradient(135deg, #c9a84c, #e8d48b);
             border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
-            font-size: 16px;
+            font-size: 18px; margin-left: 4px; flex-shrink: 0;
         }
-        .chat-header-name {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 16px; font-weight: 600; color: #c9a84c;
+        .tg-header-text {
+            margin-left: 12px; flex: 1;
         }
-        .chat-header-status { font-size: 11px; color: #777; }
-        .chat-close {
-            background: none; border: none; color: #666; font-size: 20px;
-            cursor: pointer; padding: 4px;
+        .tg-header-name {
+            font-size: 15px; font-weight: 600; color: #fff;
         }
-        .chat-close:hover { color: #c9a84c; }
+        .tg-header-status {
+            font-size: 12px; color: #6d8aab;
+        }
+        .tg-header-status.online { color: #4dd964; }
 
-        .chat-messages {
+        /* Messages area */
+        .tg-messages {
             flex: 1;
-            padding: 16px;
             overflow-y: auto;
-            max-height: 340px;
+            padding: 12px 12px 8px;
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 4px;
+            background: #0e1621;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.015'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
         }
-        .chat-messages::-webkit-scrollbar { width: 4px; }
-        .chat-messages::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+        .tg-messages::-webkit-scrollbar { width: 6px; }
+        .tg-messages::-webkit-scrollbar-thumb { background: #2b3e50; border-radius: 3px; }
+        .tg-messages::-webkit-scrollbar-track { background: transparent; }
 
-        .msg {
+        /* Date separator */
+        .tg-date-sep {
+            text-align: center;
+            padding: 8px 0;
+        }
+        .tg-date-sep span {
+            background: #182533;
+            color: #5a7a96;
+            font-size: 12px; font-weight: 500;
+            padding: 4px 12px;
+            border-radius: 12px;
+        }
+
+        /* Message bubbles */
+        .tg-msg {
             max-width: 85%;
-            padding: 10px 14px;
-            font-size: 14px;
-            line-height: 1.5;
-            border-radius: 16px;
+            padding: 7px 10px 6px;
+            font-size: 15px;
+            line-height: 1.45;
+            position: relative;
+            word-wrap: break-word;
         }
-        .msg.bot {
-            background: #1f1f18;
-            color: #e0d8c0;
+        .tg-msg.bot {
             align-self: flex-start;
-            border-bottom-left-radius: 4px;
+            background: #182533;
+            color: #f5f5f5;
+            border-radius: 12px 12px 12px 4px;
         }
-        .msg.user {
-            background: linear-gradient(135deg, #c9a84c, #b8953f);
-            color: #1a1a1a;
+        .tg-msg.user {
             align-self: flex-end;
-            border-bottom-right-radius: 4px;
-            font-weight: 500;
+            background: #2b5278;
+            color: #f5f5f5;
+            border-radius: 12px 12px 4px 12px;
         }
-        .msg.typing { color: #888; font-style: italic; }
+        .tg-msg .time {
+            float: right;
+            margin: 6px 0 -4px 12px;
+            font-size: 11px;
+            color: rgba(255,255,255,0.35);
+        }
+        .tg-msg.user .time { color: rgba(255,255,255,0.45); }
 
-        .quick-replies {
+        .tg-msg.typing {
+            color: #6d8aab;
+            font-style: italic;
+        }
+        .tg-msg.typing .typing-dots span {
+            display: inline-block;
+            animation: blink 1.4s infinite both;
+        }
+        .tg-msg.typing .typing-dots span:nth-child(2) { animation-delay: 0.2s; }
+        .tg-msg.typing .typing-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes blink {
+            0%, 80%, 100% { opacity: 0.3; }
+            40% { opacity: 1; }
+        }
+
+        /* Quick replies — pill style */
+        .tg-quick-replies {
             display: flex;
-            gap: 8px;
+            gap: 6px;
             flex-wrap: wrap;
-            padding: 0 16px 8px;
+            padding: 4px 12px 8px;
+            flex-shrink: 0;
+            background: #0e1621;
         }
-        .quick-reply {
-            padding: 6px 14px;
-            background: #1a1a10;
-            border: 1px solid #3a3420;
-            border-radius: 20px;
+        .tg-quick-btn {
+            padding: 7px 14px;
+            background: #1a2736;
+            border: 1px solid #2b3e50;
+            border-radius: 18px;
             color: #c9a84c;
-            font-size: 12px;
+            font-size: 13px; font-weight: 500;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.15s;
+            white-space: nowrap;
+            font-family: inherit;
         }
-        .quick-reply:hover {
+        .tg-quick-btn:hover, .tg-quick-btn:active {
             background: #c9a84c;
             color: #1a1a1a;
+            border-color: #c9a84c;
         }
 
-        .chat-input-area {
+        /* Input bar — Telegram style */
+        .tg-input-bar {
             display: flex;
-            padding: 12px 16px;
+            align-items: flex-end;
+            padding: 8px 10px;
+            background: #1a2736;
+            border-top: 1px solid #0d1520;
+            flex-shrink: 0;
             gap: 8px;
-            border-top: 1px solid #2a2518;
-            background: #111;
         }
-        .chat-input {
+        .tg-input {
             flex: 1;
-            background: #1a1a1a;
-            border: 1px solid #333;
-            border-radius: 24px;
+            background: #0e1621;
+            border: none;
+            border-radius: 20px;
             padding: 10px 16px;
-            color: #fff;
-            font-size: 14px;
-            font-family: 'Montserrat', sans-serif;
+            color: #f5f5f5;
+            font-size: 15px;
+            font-family: inherit;
             outline: none;
+            max-height: 120px;
+            resize: none;
+            line-height: 1.4;
         }
-        .chat-input::placeholder { color: #555; }
-        .chat-input:focus { border-color: #c9a84c; }
-        .chat-send {
+        .tg-input::placeholder { color: #4a6478; }
+        .tg-send {
             width: 40px; height: 40px;
-            background: linear-gradient(135deg, #c9a84c, #b8953f);
-            border: none; border-radius: 50%;
+            background: none; border: none;
             cursor: pointer; display: flex;
             align-items: center; justify-content: center;
+            color: #6d8aab;
+            transition: color 0.15s;
+            border-radius: 50%;
+            flex-shrink: 0;
         }
-        .chat-send svg { width: 18px; height: 18px; fill: #1a1a1a; }
+        .tg-send.active { color: #c9a84c; }
+        .tg-send:hover { background: rgba(255,255,255,0.05); }
+        .tg-send svg { width: 22px; height: 22px; }
 
-        /* Mobile */
-        @media (max-width: 480px) {
-            .chat-window {
-                width: calc(100vw - 16px);
-                right: 8px;
-                bottom: 88px;
-                max-height: 60vh;
-            }
-            .mock-nav-links { display: none; }
-            .mock-hero h1 { font-size: 32px; }
-            .mock-hero { height: 360px; }
+        /* Safe area for notched phones */
+        @supports (padding-bottom: env(safe-area-inset-bottom)) {
+            .tg-input-bar { padding-bottom: calc(8px + env(safe-area-inset-bottom)); }
         }
     </style>
 </head>
@@ -351,7 +382,7 @@
 
     <!-- Demo Banner -->
     <div class="demo-banner">
-        ✨ <span>DEMO</span> — This is a live chatbot demo for Broadway Dental Boutique by <span>Cloud Hak</span> ✨
+        ✨ <span>DEMO</span> — Live chatbot demo for Broadway Dental Boutique by <span>Cloud Hak</span> ✨
     </div>
 
     <!-- Site Mockup -->
@@ -377,26 +408,11 @@
         <div class="mock-services">
             <h2>Our Dental Treatments</h2>
             <div class="mock-services-grid">
-                <div class="mock-service-card">
-                    <div class="icon">🦷</div>
-                    <h4>General Dentistry</h4>
-                </div>
-                <div class="mock-service-card">
-                    <div class="icon">✨</div>
-                    <h4>Invisalign</h4>
-                </div>
-                <div class="mock-service-card">
-                    <div class="icon">💎</div>
-                    <h4>Dental Implants</h4>
-                </div>
-                <div class="mock-service-card">
-                    <div class="icon">💫</div>
-                    <h4>Facial Aesthetics</h4>
-                </div>
-                <div class="mock-service-card">
-                    <div class="icon">😁</div>
-                    <h4>Cosmetic Dentistry</h4>
-                </div>
+                <div class="mock-service-card"><div class="icon">🦷</div><h4>General Dentistry</h4></div>
+                <div class="mock-service-card"><div class="icon">✨</div><h4>Invisalign</h4></div>
+                <div class="mock-service-card"><div class="icon">💎</div><h4>Dental Implants</h4></div>
+                <div class="mock-service-card"><div class="icon">💫</div><h4>Facial Aesthetics</h4></div>
+                <div class="mock-service-card"><div class="icon">😁</div><h4>Cosmetic Dentistry</h4></div>
             </div>
         </div>
 
@@ -405,35 +421,38 @@
         </div>
     </div>
 
-    <!-- Chat Widget -->
+    <!-- Chat Bubble -->
     <div class="chat-bubble" id="chatBubble" onclick="toggleChat()">
         <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/></svg>
     </div>
 
-    <div class="chat-window" id="chatWindow">
-        <div class="chat-header">
-            <div class="chat-header-info">
-                <div class="chat-header-avatar">🦷</div>
-                <div>
-                    <div class="chat-header-name">Broadway Dental</div>
-                    <div class="chat-header-status">Online now</div>
-                </div>
+    <!-- Telegram-style Chat Overlay -->
+    <div class="chat-overlay" id="chatOverlay">
+        <div class="tg-header">
+            <button class="tg-back" onclick="toggleChat()">←</button>
+            <div class="tg-avatar">🦷</div>
+            <div class="tg-header-text">
+                <div class="tg-header-name">Broadway Dental</div>
+                <div class="tg-header-status online">online</div>
             </div>
-            <button class="chat-close" onclick="toggleChat()">✕</button>
         </div>
-        <div class="chat-messages" id="chatMessages">
-            <div class="msg bot">Welcome to Broadway Dental Boutique! 👋 How can I help you today?</div>
+        <div class="tg-messages" id="chatMessages">
+            <div class="tg-date-sep"><span>Today</span></div>
+            <div class="tg-msg bot">
+                Welcome to Broadway Dental Boutique! 👋<span class="time">now</span>
+                <br>How can I help you today?
+            </div>
         </div>
-        <div class="quick-replies" id="quickReplies">
-            <button class="quick-reply" onclick="sendQuickReply(this)">Tell me about Invisalign</button>
-            <button class="quick-reply" onclick="sendQuickReply(this)">Do you treat nervous patients?</button>
-            <button class="quick-reply" onclick="sendQuickReply(this)">Book an appointment</button>
-            <button class="quick-reply" onclick="sendQuickReply(this)">Teeth whitening</button>
+        <div class="tg-quick-replies" id="quickReplies">
+            <button class="tg-quick-btn" onclick="sendQuickReply(this)">Tell me about Invisalign</button>
+            <button class="tg-quick-btn" onclick="sendQuickReply(this)">Nervous patient</button>
+            <button class="tg-quick-btn" onclick="sendQuickReply(this)">Book appointment</button>
+            <button class="tg-quick-btn" onclick="sendQuickReply(this)">Teeth whitening</button>
         </div>
-        <div class="chat-input-area">
-            <input class="chat-input" id="chatInput" placeholder="Type your message..." onkeypress="if(event.key==='Enter')sendMessage()">
-            <button class="chat-send" onclick="sendMessage()">
-                <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+        <div class="tg-input-bar">
+            <input class="tg-input" id="chatInput" placeholder="Message..." onkeypress="if(event.key==='Enter')sendMessage()" oninput="updateSendBtn()">
+            <button class="tg-send" id="sendBtn" onclick="sendMessage()">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
             </button>
         </div>
     </div>
@@ -445,16 +464,24 @@
 
         function toggleChat() {
             chatOpen = !chatOpen;
-            document.getElementById('chatWindow').classList.toggle('open', chatOpen);
-            if (chatOpen) document.getElementById('chatBubble').style.animation = 'none';
-            else document.getElementById('chatBubble').style.animation = 'pulse-gold 2s infinite';
+            document.getElementById('chatOverlay').classList.toggle('open', chatOpen);
+            document.getElementById('chatBubble').classList.toggle('hidden', chatOpen);
+            if (chatOpen) {
+                setTimeout(() => document.getElementById('chatInput').focus(), 350);
+            }
+        }
+
+        function getTime() {
+            const d = new Date();
+            return d.getHours().toString().padStart(2,'0') + ':' + d.getMinutes().toString().padStart(2,'0');
         }
 
         function addMessage(text, type) {
             const container = document.getElementById('chatMessages');
             const div = document.createElement('div');
-            div.className = 'msg ' + type;
-            div.textContent = text;
+            div.className = 'tg-msg ' + type;
+            const time = '<span class="time">' + getTime() + '</span>';
+            div.innerHTML = text + time;
             container.appendChild(div);
             container.scrollTop = container.scrollHeight;
         }
@@ -462,9 +489,9 @@
         function showTyping() {
             const container = document.getElementById('chatMessages');
             const div = document.createElement('div');
-            div.className = 'msg bot typing';
+            div.className = 'tg-msg bot typing';
             div.id = 'typingIndicator';
-            div.textContent = 'Typing...';
+            div.innerHTML = '<span class="typing-dots"><span>●</span> <span>●</span> <span>●</span></span>';
             container.appendChild(div);
             container.scrollTop = container.scrollHeight;
         }
@@ -474,11 +501,18 @@
             if (el) el.remove();
         }
 
+        function updateSendBtn() {
+            const input = document.getElementById('chatInput');
+            const btn = document.getElementById('sendBtn');
+            btn.classList.toggle('active', input.value.trim().length > 0);
+        }
+
         async function sendMessage(text) {
             const input = document.getElementById('chatInput');
             const msg = text || input.value.trim();
             if (!msg) return;
             input.value = '';
+            updateSendBtn();
 
             // Hide quick replies after first message
             document.getElementById('quickReplies').style.display = 'none';
