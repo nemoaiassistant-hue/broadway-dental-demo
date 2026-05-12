@@ -211,6 +211,31 @@
         }
         .tg-msg.user .time { color: rgba(255,255,255,0.45); }
 
+        /* Formatted text in bot messages */
+        .tg-msg.bot strong {
+            color: #e8d48b;
+            font-weight: 600;
+        }
+        .tg-msg.bot em {
+            color: #b8c4d0;
+            font-style: italic;
+        }
+        .tg-msg.bot ul {
+            margin: 6px 0;
+            padding-left: 18px;
+            list-style: none;
+        }
+        .tg-msg.bot li {
+            margin: 3px 0;
+            position: relative;
+        }
+        .tg-msg.bot li::before {
+            content: '•';
+            position: absolute;
+            left: -14px;
+            color: #c9a84c;
+        }
+
         .tg-msg.typing {
             color: #6d8aab;
             font-style: italic;
@@ -440,12 +465,30 @@
             return d.getHours().toString().padStart(2,'0') + ':' + d.getMinutes().toString().padStart(2,'0');
         }
 
+        // Simple markdown to HTML parser
+        function parseMarkdown(text) {
+            return text
+                // Bold: **text**
+                .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+                // Italic: *text*
+                .replace(/(?<!\*)\*(?!\*)(.+?)(?<!\*)\*(?!\*)/g, '<em>$1</em>')
+                // Bullet points: lines starting with - or *
+                .replace(/^[\-\*]\s+(.+)$/gm, '<li>$1</li>')
+                // Wrap consecutive <li> in <ul>
+                .replace(/((?:<li>.*<\/li>\n?)+)/g, '<ul>$1</ul>')
+                // Line breaks (double newline = paragraph)
+                .replace(/\n\n/g, '<br><br>')
+                // Single newline
+                .replace(/\n/g, '<br>');
+        }
+
         function addMessage(text, type) {
             const container = document.getElementById('chatMessages');
             const div = document.createElement('div');
             div.className = 'tg-msg ' + type;
             const time = '<span class="time">' + getTime() + '</span>';
-            div.innerHTML = text + time;
+            const formatted = type === 'bot' ? parseMarkdown(text) : text;
+            div.innerHTML = formatted + time;
             container.appendChild(div);
             container.scrollTop = container.scrollHeight;
         }
