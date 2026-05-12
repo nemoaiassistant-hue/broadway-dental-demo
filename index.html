@@ -235,6 +235,14 @@
             left: -14px;
             color: #c9a84c;
         }
+        .tg-msg.bot a {
+            color: #e8d48b;
+            text-decoration: underline;
+            text-underline-offset: 2px;
+        }
+        .tg-msg.bot a:hover {
+            color: #f0e0a0;
+        }
 
         .tg-msg.typing {
             color: #6d8aab;
@@ -468,6 +476,8 @@
         // Simple markdown to HTML parser
         function parseMarkdown(text) {
             return text
+                // Links: [text](url)
+                .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>')
                 // Bold: **text**
                 .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
                 // Italic: *text*
