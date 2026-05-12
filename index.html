@@ -422,14 +422,28 @@
         function toggleChat() {
             chatOpen = !chatOpen;
             const overlay = document.getElementById('chatOverlay');
-            overlay.classList.toggle('open', chatOpen);
-            document.getElementById('chatBubble').classList.toggle('hidden', chatOpen);
+            const bubble = document.getElementById('chatBubble');
+            
             if (chatOpen) {
+                overlay.classList.add('open');
+                bubble.classList.add('hidden');
+                // Desktop: show via inline styles (CSS transition still works)
+                if (window.innerWidth > 480) {
+                    requestAnimationFrame(() => {
+                        overlay.style.opacity = '1';
+                        overlay.style.transform = 'translateY(0)';
+                    });
+                }
+                // Mobile only: auto-focus
                 if (window.innerWidth <= 480) {
                     setTimeout(() => document.getElementById('chatInput').focus(), 350);
                 }
             } else {
-                // Reset inline styles set by keyboard handler
+                overlay.classList.remove('open');
+                bubble.classList.remove('hidden');
+                // Reset inline styles
+                overlay.style.opacity = '';
+                overlay.style.transform = '';
                 overlay.style.height = '';
                 overlay.style.top = '';
             }
