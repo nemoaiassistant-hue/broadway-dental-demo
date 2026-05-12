@@ -487,8 +487,8 @@
                 .replace(/(?<!\*)\*(?!\*)(.+?)(?<!\*)\*(?!\*)/g, '<em>$1</em>')
                 // Bullet points: lines starting with - or *
                 .replace(/^[\-\*]\s+(.+)$/gm, '<li>$1</li>')
-                // Wrap consecutive <li> in <ul> — add spacing above
-                .replace(/((?:<li>.*<\/li>\n?)+)/g, '<br><ul>$1</ul>')
+                // Wrap consecutive <li> in <ul> — add spacing above, remove inner newlines
+                .replace(/((?:<li>.*<\/li>\n?)+)/g, (match) => '<br><ul>' + match.replace(/\n/g, '') + '</ul>')
                 // Line breaks (double newline = paragraph)
                 .replace(/\n\n/g, '<br><br>')
                 // Single newline
