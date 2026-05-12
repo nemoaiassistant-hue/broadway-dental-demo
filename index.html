@@ -468,33 +468,63 @@
         let messages = [];
 
         // ===== KEYBOARD HANDLING =====
-        // On mobile, the virtual keyboard shrinks the visual viewport.
-        // We detect this and resize the chat overlay to only the visible area.
+        // iOS Chrome doesn't resize the viewport when keyboard opens — it scrolls the page.
+        // We pin the chat overlay to the visualViewport (visible area) instead.
         function setupKeyboardHandling() {
             const overlay = document.getElementById('chatOverlay');
-            const input = document.getElementById('chatInput');
             const msgs = document.getElementById('chatMessages');
+            const input = document.getElementById('chatInput');
 
-            function adjustHeight() {
+            function adjustToViewport() {
                 if (!chatOpen) return;
                 const vv = window.visualViewport;
                 if (!vv) return;
 
-                // visualViewport.height = visible area above keyboard
-                const offsetTop = vv.offsetTop || 0;
+                // Pin overlay to the visible area (above keyboard)
+                overlay.style.position = 'fixed';
+                overlay.style.top = vv.offsetTop + 'px';
+                overlay.style.left = '0';
+                overlay.style.right = '0';
                 overlay.style.height = vv.height + 'px';
-                overlay.style.top = offsetTop + 'px';
 
-                // Scroll messages to bottom after resize
+                // Keep messages scrolled to bottom
                 requestAnimationFrame(() => {
                     msgs.scrollTop = msgs.scrollHeight;
                 });
             }
 
             if (window.visualViewport) {
-                window.visualViewport.addEventListener('resize', adjustHeight);
-                window.visualViewport.addEventListener('scroll', adjustHeight);
+                window.visualViewport.addEventListener('resize', adjustToViewport);
+                window.visualViewport.addEventListener('scroll', adjustToViewport);
             }
+
+            // Also adjust on input focus (keyboard animation takes ~300ms)
+            input.addEventListener('focus', () => {
+                // Prevent body scroll on iOS
+                document.body.style.overflow = 'hidden';
+                document.body.style.position = 'fixed';
+                document.body.style.width = '100%';
+                setTimeout(adjustToViewport, 50);
+                setTimeout(adjustToViewport, 150);
+                setTimeout(adjustToViewport, 300);
+                setTimeout(adjustToViewport, 500);
+            });
+
+            input.addEventListener('blur', () => {
+                // Restore body
+                document.body.style.overflow = '';
+                document.body.style.position = '';
+                document.body.style.width = '';
+                // Let overlay return to full screen after keyboard closes
+                setTimeout(() => {
+                    if (!chatOpen) return;
+                    const vv = window.visualViewport;
+                    if (vv) {
+                        overlay.style.top = vv.offsetTop + 'px';
+                        overlay.style.height = vv.height + 'px';
+                    }
+                }, 100);
+            });
         }
 
         setupKeyboardHandling();
