@@ -196,6 +196,14 @@
             }
         }
 
+        /* Keyboard open state — mobile only */
+        @media (max-width: 480px) {
+            .chat-overlay.keyboard-open {
+                height: 100vh;
+                height: 100dvh;
+            }
+        }
+
         /* Header — Telegram style */
         .tg-header {
             display: flex;
@@ -462,12 +470,71 @@
         let chatOpen = false;
         let messages = [];
 
+        // ===== KEYBOARD HANDLING =====
+        // Use visualViewport to detect keyboard open/close and adjust chat overlay
+        function setupKeyboardHandling() {
+            const overlay = document.getElementById('chatOverlay');
+            const input = document.getElementById('chatInput');
+
+            function onViewportResize() {
+                if (!chatOpen) return;
+                const vv = window.visualViewport;
+                const isKeyboardOpen = vv.height < window.innerHeight - 100;
+                
+                if (isKeyboardOpen) {
+                    // Keyboard is open — pin overlay to visible viewport
+                    overlay.style.position = 'fixed';
+                    overlay.style.top = '0';
+                    overlay.style.bottom = 'auto';
+                    overlay.style.height = vv.height + 'px';
+                    overlay.classList.add('keyboard-open');
+                } else {
+                    // Keyboard closed — restore full screen
+                    overlay.style.height = '';
+                    overlay.classList.remove('keyboard-open');
+                }
+            }
+
+            if (window.visualViewport) {
+                window.visualViewport.addEventListener('resize', onViewportResize);
+                window.visualViewport.addEventListener('scroll', onViewportResize);
+            }
+
+            // Fallback: also handle focus/blur for iOS Safari
+            input.addEventListener('focus', () => {
+                setTimeout(() => {
+                    const vv = window.visualViewport;
+                    if (vv && vv.height < window.innerHeight - 100) {
+                        overlay.style.height = vv.height + 'px';
+                        overlay.classList.add('keyboard-open');
+                    }
+                    // Scroll messages to bottom after keyboard animation
+                    const msgs = document.getElementById('chatMessages');
+                    msgs.scrollTop = msgs.scrollHeight;
+                }, 300);
+            });
+
+            input.addEventListener('blur', () => {
+                setTimeout(() => {
+                    overlay.style.height = '';
+                    overlay.classList.remove('keyboard-open');
+                }, 100);
+            });
+        }
+
+        setupKeyboardHandling();
+
         function toggleChat() {
             chatOpen = !chatOpen;
-            document.getElementById('chatOverlay').classList.toggle('open', chatOpen);
+            const overlay = document.getElementById('chatOverlay');
+            overlay.classList.toggle('open', chatOpen);
             document.getElementById('chatBubble').classList.toggle('hidden', chatOpen);
             if (chatOpen) {
                 setTimeout(() => document.getElementById('chatInput').focus(), 350);
+            } else {
+                // Reset keyboard state on close
+                overlay.style.height = '';
+                overlay.classList.remove('keyboard-open');
             }
         }
 
