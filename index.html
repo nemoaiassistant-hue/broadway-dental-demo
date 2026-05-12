@@ -353,13 +353,18 @@
         // ===== KEYBOARD HANDLING =====
         // iOS Chrome doesn't resize the viewport when keyboard opens — it scrolls the page.
         // We pin the chat overlay to the visualViewport (visible area) instead.
+        // Only applies on mobile (narrow screens).
         function setupKeyboardHandling() {
             const overlay = document.getElementById('chatOverlay');
             const msgs = document.getElementById('chatMessages');
             const input = document.getElementById('chatInput');
 
+            function isMobile() {
+                return window.innerWidth <= 480;
+            }
+
             function adjustToViewport() {
-                if (!chatOpen) return;
+                if (!chatOpen || !isMobile()) return;
                 const vv = window.visualViewport;
                 if (!vv) return;
 
@@ -383,6 +388,7 @@
 
             // Also adjust on input focus (keyboard animation takes ~300ms)
             input.addEventListener('focus', () => {
+                if (!isMobile()) return;
                 // Prevent body scroll on iOS
                 document.body.style.overflow = 'hidden';
                 document.body.style.position = 'fixed';
@@ -394,6 +400,7 @@
             });
 
             input.addEventListener('blur', () => {
+                if (!isMobile()) return;
                 // Restore body
                 document.body.style.overflow = '';
                 document.body.style.position = '';
