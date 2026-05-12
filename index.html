@@ -221,7 +221,7 @@
             font-style: italic;
         }
         .tg-msg.bot ul {
-            margin: 10px 0 6px 0;
+            margin: 4px 0;
             padding-left: 18px;
             list-style: none;
         }
@@ -487,8 +487,8 @@
                 .replace(/(?<!\*)\*(?!\*)(.+?)(?<!\*)\*(?!\*)/g, '<em>$1</em>')
                 // Bullet points: lines starting with - or *
                 .replace(/^[\-\*]\s+(.+)$/gm, '<li>$1</li>')
-                // Wrap consecutive <li> in <ul>
-                .replace(/((?:<li>.*<\/li>\n?)+)/g, '<ul>$1</ul>')
+                // Wrap consecutive <li> in <ul> — add spacing above
+                .replace(/((?:<li>.*<\/li>\n?)+)/g, '<br><ul>$1</ul>')
                 // Line breaks (double newline = paragraph)
                 .replace(/\n\n/g, '<br><br>')
                 // Single newline
