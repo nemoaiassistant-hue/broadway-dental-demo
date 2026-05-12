@@ -110,8 +110,8 @@
                 border: 1px solid #1e2a3a;
             }
             .chat-overlay.open {
-                transform: translateY(0);
-                opacity: 1;
+                transform: translateY(0) !important;
+                opacity: 1 !important;
             }
         }
 
@@ -425,7 +425,9 @@
             overlay.classList.toggle('open', chatOpen);
             document.getElementById('chatBubble').classList.toggle('hidden', chatOpen);
             if (chatOpen) {
-                setTimeout(() => document.getElementById('chatInput').focus(), 350);
+                if (window.innerWidth <= 480) {
+                    setTimeout(() => document.getElementById('chatInput').focus(), 350);
+                }
             } else {
                 // Reset inline styles set by keyboard handler
                 overlay.style.height = '';
