@@ -34,103 +34,17 @@
         }
         .demo-banner span { font-weight: 700; }
 
-        /* Site mockup */
-        .site-mockup {
+        /* Site screenshot background */
+        .site-screenshot {
             margin-top: 38px;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
+            width: 100%;
+            min-height: calc(100vh - 38px);
+            background: #0a0a0a;
         }
-
-        .mock-nav {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 16px 40px;
-            background: rgba(10, 10, 10, 0.95);
-            border-bottom: 1px solid #222;
-        }
-        .mock-nav-logo {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 22px; font-weight: 600;
-            color: #c9a84c; letter-spacing: 1px;
-        }
-        .mock-nav-links {
-            display: flex; gap: 28px;
-            font-size: 13px; color: #999; letter-spacing: 0.5px;
-        }
-
-        .mock-hero {
-            position: relative;
-            height: 500px;
-            background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 50%, #1a1510 100%);
-            display: flex; align-items: center; justify-content: center;
-            text-align: center; overflow: hidden;
-        }
-        .mock-hero::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: radial-gradient(ellipse at center, rgba(201, 168, 76, 0.08) 0%, transparent 70%);
-        }
-        .mock-hero-content {
-            position: relative; z-index: 1;
-            max-width: 600px; padding: 0 20px;
-        }
-        .mock-hero h1 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 48px; font-weight: 600;
-            color: #fff; margin-bottom: 16px; line-height: 1.2;
-        }
-        .mock-hero p {
-            font-size: 15px; color: #b0a080;
-            line-height: 1.6; margin-bottom: 24px;
-            max-width: 480px; margin-left: auto; margin-right: auto;
-        }
-        .mock-hero-btn {
-            display: inline-block;
-            padding: 12px 32px;
-            background: #c9a84c;
-            color: #1a1a1a;
-            font-size: 12px; font-weight: 600;
-            letter-spacing: 2px; text-transform: uppercase;
-            border: none; cursor: pointer;
-        }
-
-        .mock-services {
-            padding: 60px 40px;
-            background: #111; text-align: center;
-        }
-        .mock-services h2 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 28px; color: #c9a84c; margin-bottom: 40px;
-        }
-        .mock-services-grid {
-            display: flex; gap: 20px;
-            justify-content: center; flex-wrap: wrap;
-            max-width: 900px; margin: 0 auto;
-        }
-        .mock-service-card {
-            background: #1a1a1a; border: 1px solid #2a2a2a;
-            padding: 28px 20px; width: 160px; text-align: center;
-        }
-        .mock-service-card .icon {
-            width: 40px; height: 40px; margin: 0 auto 12px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #c9a84c, #e8d48b);
-            display: flex; align-items: center; justify-content: center;
-            font-size: 18px;
-        }
-        .mock-service-card h4 {
-            font-size: 12px; font-weight: 500;
-            color: #ddd; letter-spacing: 0.5px;
-        }
-
-        .mock-footer {
-            padding: 30px 40px;
-            background: #080808; text-align: center;
-            color: #555; font-size: 12px;
-            border-top: 1px solid #1a1a1a;
+        .site-screenshot img {
+            width: 100%;
+            height: auto;
+            display: block;
         }
 
         /* ===== CHAT BUBBLE BUTTON ===== */
@@ -390,40 +304,9 @@
         ✨ <span>DEMO</span> — Live chatbot demo for Broadway Dental Boutique by <span>Cloud Hak</span> ✨
     </div>
 
-    <!-- Site Mockup -->
-    <div class="site-mockup">
-        <nav class="mock-nav">
-            <div class="mock-nav-logo">Broadway Dental Boutique</div>
-            <div class="mock-nav-links">
-                <span>Treatments</span>
-                <span>About</span>
-                <span>Team</span>
-                <span>Contact</span>
-            </div>
-        </nav>
-
-        <div class="mock-hero">
-            <div class="mock-hero-content">
-                <h1>The Smile You Deserve</h1>
-                <p>Multi award-winning private dentist in Crawley town centre. Our experienced team will help you discover the beauty of a life-changing smile.</p>
-                <button class="mock-hero-btn">Book an Appointment</button>
-            </div>
-        </div>
-
-        <div class="mock-services">
-            <h2>Our Dental Treatments</h2>
-            <div class="mock-services-grid">
-                <div class="mock-service-card"><div class="icon">🦷</div><h4>General Dentistry</h4></div>
-                <div class="mock-service-card"><div class="icon">✨</div><h4>Invisalign</h4></div>
-                <div class="mock-service-card"><div class="icon">💎</div><h4>Dental Implants</h4></div>
-                <div class="mock-service-card"><div class="icon">💫</div><h4>Facial Aesthetics</h4></div>
-                <div class="mock-service-card"><div class="icon">😁</div><h4>Cosmetic Dentistry</h4></div>
-            </div>
-        </div>
-
-        <div class="mock-footer">
-            Broadway Dental Boutique · 38 The Broadway, Crawley, West Sussex, RH10 1HG · 01293 428342
-        </div>
+    <!-- Site Screenshot -->
+    <div class="site-screenshot">
+        <img src="site-screenshot.png" alt="Broadway Dental Boutique website">
     </div>
 
     <!-- Chat Bubble -->
