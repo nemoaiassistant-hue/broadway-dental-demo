@@ -110,8 +110,8 @@
                 border: 1px solid #1e2a3a;
             }
             .chat-overlay.open {
-                transform: translateY(0) !important;
-                opacity: 1 !important;
+                transform: translateY(0);
+                opacity: 1;
             }
         }
 
@@ -353,18 +353,17 @@
         // ===== KEYBOARD HANDLING =====
         // iOS Chrome doesn't resize the viewport when keyboard opens — it scrolls the page.
         // We pin the chat overlay to the visualViewport (visible area) instead.
-        // Only applies on mobile (narrow screens).
+        // Only set up on mobile devices.
         function setupKeyboardHandling() {
+            // Skip entirely on desktop
+            if (window.innerWidth > 480) return;
+            
             const overlay = document.getElementById('chatOverlay');
             const msgs = document.getElementById('chatMessages');
             const input = document.getElementById('chatInput');
 
-            function isMobile() {
-                return window.innerWidth <= 480;
-            }
-
             function adjustToViewport() {
-                if (!chatOpen || !isMobile()) return;
+                if (!chatOpen) return;
                 const vv = window.visualViewport;
                 if (!vv) return;
 
@@ -386,10 +385,7 @@
                 window.visualViewport.addEventListener('scroll', adjustToViewport);
             }
 
-            // Also adjust on input focus (keyboard animation takes ~300ms)
             input.addEventListener('focus', () => {
-                if (!isMobile()) return;
-                // Prevent body scroll on iOS
                 document.body.style.overflow = 'hidden';
                 document.body.style.position = 'fixed';
                 document.body.style.width = '100%';
@@ -400,12 +396,9 @@
             });
 
             input.addEventListener('blur', () => {
-                if (!isMobile()) return;
-                // Restore body
                 document.body.style.overflow = '';
                 document.body.style.position = '';
                 document.body.style.width = '';
-                // Let overlay return to full screen after keyboard closes
                 setTimeout(() => {
                     if (!chatOpen) return;
                     const vv = window.visualViewport;
@@ -427,21 +420,12 @@
             if (chatOpen) {
                 overlay.classList.add('open');
                 bubble.classList.add('hidden');
-                // Desktop: show via inline styles (CSS transition still works)
-                if (window.innerWidth > 480) {
-                    requestAnimationFrame(() => {
-                        overlay.style.opacity = '1';
-                        overlay.style.transform = 'translateY(0)';
-                    });
-                }
-                // Mobile only: auto-focus
                 if (window.innerWidth <= 480) {
                     setTimeout(() => document.getElementById('chatInput').focus(), 350);
                 }
             } else {
                 overlay.classList.remove('open');
                 bubble.classList.remove('hidden');
-                // Reset inline styles
                 overlay.style.opacity = '';
                 overlay.style.transform = '';
                 overlay.style.height = '';
